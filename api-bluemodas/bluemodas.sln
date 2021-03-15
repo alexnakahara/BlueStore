@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bluemodas", "bluemodas\bluemodas.csproj", "{21C98C21-0BB3-465C-86A7-AD1AC803D876}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "bluemodas-db", "bluemodas-db\bluemodas-db.sqlproj", "{6363B9CC-41ED-4890-BD3B-833E0EBE92A0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{21C98C21-0BB3-465C-86A7-AD1AC803D876}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21C98C21-0BB3-465C-86A7-AD1AC803D876}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21C98C21-0BB3-465C-86A7-AD1AC803D876}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21C98C21-0BB3-465C-86A7-AD1AC803D876}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6363B9CC-41ED-4890-BD3B-833E0EBE92A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6363B9CC-41ED-4890-BD3B-833E0EBE92A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6363B9CC-41ED-4890-BD3B-833E0EBE92A0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{6363B9CC-41ED-4890-BD3B-833E0EBE92A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6363B9CC-41ED-4890-BD3B-833E0EBE92A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6363B9CC-41ED-4890-BD3B-833E0EBE92A0}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4F27B691-4C5F-455E-97B9-B60BA901A6CD}
+	EndGlobalSection
+EndGlobal
