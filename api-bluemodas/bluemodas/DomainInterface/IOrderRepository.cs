@@ -4,8 +4,7 @@ namespace bluemodas.DomainInterface
 {
     public interface IOrderRepository
     {
-        Order AddOrder();
-        int AddClient();
-        int AddProduct();
+        Order AddOrder(Order order);
+        Client AddClient(Client client);
     }
 }
