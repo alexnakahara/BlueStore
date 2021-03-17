@@ -2,6 +2,7 @@
 using bluemodas.Models;
 using bluemodas.Services;
 using Dapper;
+using System;
 using System.Data.SqlClient;
 using System.Linq;
 
@@ -16,32 +17,61 @@ namespace bluemodas.Repositories
         }
         public Order AddOrder(Order order)
         {
-
             Client newClient = AddClient(order.client);
+            string code = GenerateCode();
+            int idOrder = AddOrder(newClient.id, code);
 
             Order newOrder = new Order()
             {
-                client = newClient
+                id = idOrder,
+                code = code,
+                client = newClient,
+                products = order.products
             };
 
-            string query = @"DECLARE INT @id_order
-                            INSERT INTO order(id_client, id_product) VALUES(@id_client, @id_product)  
-                            SET @id_order = SCOPE_IDENTITY()
-                            SELECT * FROM order WHERE id = @id_order";
-
             using var db = new SqlConnection(_connection.GetConnectionString());
-
-            foreach(Product item in order.products)
+            foreach(ProductOrder item in order.products)
             {
-                var product = db.Query<Product>(query, new { id_client = newClient.id, id_product = item.id }).SingleOrDefault();
-                newOrder.products.Add(product);
+                string query = @"INSERT INTO orders(id, code, id_product, quantity) VALUES(id_order, @code, @id_product, @quantity)";
+                newOrder.id = db.Execute(query, new { id_order = newClient.id, newOrder.code,  id_product = item.id, item.quantity });
             }
 
             return newOrder;
         }
+        //public Order GetOrder(int id_order)
+        //{
+        //    string query = @"DECLARE @id_client INT
+        //                    SELECT * FROM orders WHERE id = 1
+
+        //                    SELECT 
+        //                        p.*,
+        //                        oi.quantity
+        //                    FROM orders AS o
+        //                    INNER JOIN orderItems AS oi ON o.id = oi.id AND o.code = oi.code 
+        //                    INNER JOIN product AS p ON oi.id_product = p.id
+        //                    WHERE o.id = @id_order
+
+        //                    SELECT @id_client = id_client FROM orders WHERE id = @id_order
+
+        //                    SELECT * FROM client WHERE id = @id_client";
+        //    using var db = new SqlConnection(_connection.GetConnectionString());
+        //    return null;
+        //}
+        private int AddOrder(int id_client, string code)
+        {
+            using var db = new SqlConnection(_connection.GetConnectionString());
+            string query = @"DECLARE @id_order INT
+                            INSERT INTO orders(id_client, code, date, ) VALUES(@id_client, @code, GETUTCDATE())  
+                            SET @id_order = SCOPE_IDENTITY
+                            SELECT @id_order";
+
+            return db.Query<int>(query, new { id_client, code }).SingleOrDefault();
+        }
+
         public Client AddClient(Client client)
         {
-            string query = @"DECLARE INT @id_client
+            using var db = new SqlConnection(_connection.GetConnectionString());
+            string query = @"DECLARE @id_client INT
 
                             INSERT INTO client(name, email, phone) VALUES(@name, @email, @phone )
                              
@@ -49,9 +79,16 @@ namespace bluemodas.Repositories
                             
                             SELECT * FROM client WHERE id = @id_client ";
 
-            using var db = new SqlConnection(_connection.GetConnectionString());
-            return db.Query<Client>(query, new { client }).SingleOrDefault();
+            return db.Query<Client>(query, new { client.name, client.email, client.phone }).SingleOrDefault();
         }
 
+       
+        private static string GenerateCode()
+        {
+            Random random = new Random();
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$";
+            return new string(Enumerable.Repeat(chars, 8)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
     }
 }

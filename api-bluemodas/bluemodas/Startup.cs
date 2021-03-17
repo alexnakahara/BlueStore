@@ -23,7 +23,8 @@ namespace bluemodas
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ConnectionService>();
-            services.AddTransient<IProductRepository, ProductRepository>(); 
+            services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddControllers();
         }
 
