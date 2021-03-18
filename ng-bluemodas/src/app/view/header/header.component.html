@@ -1,14 +1,15 @@
 <!-- Image and text -->
-<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="#">
+<div class="-header">
+  <a class="navbar-brand" routerLink="">
     <img src="https://avatars.githubusercontent.com/u/14283866?s=400&v=4" width="30" height="30" class="d-inline-block align-top" alt="">lue Modas
   </a>
-<div class="content-carrinho">
-  <img src="https://images.lojanike.com.br/site/ni/icones/cart.png" alt="carrinho de compras" srcset="">
-  <span class="circle">
-    <span class="nu-itens">
-      {{nuItens}} 
+
+  <div class="content-carrinho" [routerLink]="'/cesta-compras'">
+    <img src="https://images.lojanike.com.br/site/ni/icones/cart.png" alt="carrinho de compras" srcset="">
+    <span class="circle">
+      <span class="nu-itens">
+        {{nuItens}} 
+      </span>
     </span>
-  </span>
+  </div>
 </div>
-</nav>

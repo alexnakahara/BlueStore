@@ -62,7 +62,8 @@
     <Build Include="Tables\product.sql" />
     <Build Include="Tables\client.sql" />
     <Build Include="Tables\orders.sql" />
-    <Build Include="Tables\order-itens.sql" />
+	<Build Include="Tables\orderitems.sql" />
+
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="bluemodas-db.refactorlog" />

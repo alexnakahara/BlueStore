@@ -6,5 +6,4 @@
     [quantity] INT NOT NULL,
     CONSTRAINT FK_OrderItens FOREIGN KEY (id_product)
     REFERENCES product(id), 
-    CONSTRAINT [PK_orderItems] PRIMARY KEY ([id], [code])
 )

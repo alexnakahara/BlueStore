@@ -32,7 +32,7 @@ namespace bluemodas.Repositories
             using var db = new SqlConnection(_connection.GetConnectionString());
             foreach(ProductOrder item in order.products)
             {
-                string query = @"INSERT INTO orders(id, code, id_product, quantity) VALUES(id_order, @code, @id_product, @quantity)";
+                string query = @"INSERT INTO orderItems(id, code, id_product, quantity) VALUES(@id_order, @code, @id_product, @quantity)";
                 newOrder.id = db.Execute(query, new { id_order = newClient.id, newOrder.code,  id_product = item.id, item.quantity });
             }
 
@@ -61,8 +61,8 @@ namespace bluemodas.Repositories
         {
             using var db = new SqlConnection(_connection.GetConnectionString());
             string query = @"DECLARE @id_order INT
-                            INSERT INTO orders(id_client, code, date, ) VALUES(@id_client, @code, GETUTCDATE())  
-                            SET @id_order = SCOPE_IDENTITY
+                            INSERT INTO orders(id_client, code, date) VALUES(@id_client, @code, GETUTCDATE())  
+                            SET @id_order = SCOPE_IDENTITY()
                             SELECT @id_order";
 
             return db.Query<int>(query, new { id_client, code }).SingleOrDefault();

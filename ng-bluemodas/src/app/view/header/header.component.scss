@@ -1,6 +1,13 @@
 
-.navbar{
-  padding: 12px 60px;
+.-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 64px;
+  background-color: #f8f9fa;
+  padding: 12px 9%;
+  margin-bottom: 24px;
 
 }
 

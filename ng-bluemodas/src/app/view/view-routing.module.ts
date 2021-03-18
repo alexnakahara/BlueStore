@@ -1,4 +1,3 @@
-import { CadastroComponent } from './cadastro/cadastro.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
@@ -16,12 +15,8 @@ const routes: Routes = [
         component: HomeComponent
       },
       {
-        path: 'carrinho',
+        path: 'cesta-compras',
         component: CarrinhoComponent
-      },
-      {
-        path: 'cadastro',
-        component: CadastroComponent
       },
       {
         path: '',

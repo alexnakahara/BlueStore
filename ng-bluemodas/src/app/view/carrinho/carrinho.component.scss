@@ -1,0 +1,27 @@
+.-card {
+  display: flex;
+  border: 2px solid;
+  border-radius: 8px;
+  height: 109px;
+  margin-bottom: 12px;
+  column-gap: 12px;
+  &__img {
+    width: 100px;
+    padding: 6px;
+    border-radius: 7px;
+  }
+  &__body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  &__price{
+    font-weight: bold;
+  }
+}
+
+.-footer{
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+}

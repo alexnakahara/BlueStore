@@ -12,9 +12,9 @@ export class ProductService {
   constructor(private httpClient: HttpClient) { }
 
   private readonly _baseUrl = 'https://localhost:44359/api';
-  // 'https://localhost:44359/api/product/list'
+
   listAvailProducts(): Observable<Product[]> {
-    const url = this._baseUrl + '/product/list'
+    const url = this._baseUrl + '/product/list';
     return this.httpClient.get<Product[]>(url);
   }
 
