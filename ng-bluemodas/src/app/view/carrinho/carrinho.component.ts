@@ -6,6 +6,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { combineLatest } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carrinho',
@@ -18,22 +19,29 @@ export class CarrinhoComponent implements OnInit {
     private state: StateService,
     private modalService: NgbModal,
     private fb: FormBuilder,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private router: Router,
   ) { }
 
   @ViewChild('nuItens') select: ElementRef;
   dataLoaded: Product[] = [];
   size = Array(100);
   form: FormGroup;
+  quantity = 1
+  nuTotal = 0
 
   ngOnInit(): void {
     combineLatest([this.state.carrinhoPlu$]).subscribe({
       next: ([resp]) => {
-        console.log('🚀 ~ file: carrinho.component.ts ~ line 32 ~ CarrinhoComponent ~ combineLatest ~ resp', resp)
         this.dataLoaded = resp;
+        this.getValorTotal();
       }
     })
     this.buildForm();
+  }
+
+  onChangeSelect() {
+    this.getValorTotal();
   }
 
   trackByIdentity = (index: number, item: any) => item;
@@ -41,6 +49,13 @@ export class CarrinhoComponent implements OnInit {
   removeItem(item: Product) {
     const newArr = this.dataLoaded.filter(i => i.id !== item.id);
     this.state.carrinhoPlu$.next(newArr);
+  }
+
+  getValorTotal() {
+    this.nuTotal = this.dataLoaded.reduce((a, i, index) => {
+      let select: any = document.querySelector('#nuProdutos' + index);
+      return a + (i.price * (select?.value ?? 1));
+    }, 0)
   }
 
   submit(longContent) {
@@ -72,7 +87,10 @@ export class CarrinhoComponent implements OnInit {
     this.orderService.emitOrder(order).subscribe({
       next: resp => {
         this.dataLoaded = resp.products;
-        console.log('🚀 ~ file: carrinho.component.ts ~ line 63 ~ CarrinhoComponent ~ this.orderService.emitOrder ~ resp', resp);
+        this.state.carrinhoPlu$.next([]);
+        this.state.confimationOrder$.next(resp);
+        this.modalService.dismissAll();
+        this.router.navigate(['confirmar-pedido']);
       },
       error: err => {
         console.error('Error => ', err);

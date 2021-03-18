@@ -8,8 +8,8 @@
             <h5 class="card-title mb-0">{{product.name}}</h5>
             <div>
               <div class="-card__price">{{ product.price | currency:'BRL':true:'1.2-2'}} </div>
-              <select  [id]="'nuProdutos' + index">
-                <option *ngFor="let item of size; index as i " [value]="product.quantity || i + 1" >{{ i + 1}}</option>
+              <select  [id]="'nuProdutos' + index" (change)="onChangeSelect()">
+                <option *ngFor="let item of size; index as i " [value]="i + 1" >{{ i + 1}}</option>
               </select>
             </div>
           </div>
@@ -17,7 +17,10 @@
           <button class="btn -card__btn-remove" (click)="removeItem(product)"> x </button> 
         </div>
         <div class="-footer">
-          <button class="btn btn-primary" (click)="submit(longContent)">Finalizar compra</button>
+          <div>
+            <h6>Valor Total: {{ nuTotal | currency:'BRL':true:'1.2-2' }}</h6>
+            <button class="btn btn-primary" (click)="submit(longContent)">Finalizar compra</button>
+          </div>
         </div>
     </ng-container>
   </div>
