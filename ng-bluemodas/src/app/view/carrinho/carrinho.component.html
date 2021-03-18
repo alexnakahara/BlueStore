@@ -2,17 +2,19 @@
   <div class="-content" >
     <ng-container *ngIf="dataLoaded.length > 0; else emptyTemplate ">
       <h3 class="mb-2"><u>Cesta de Compras</u></h3>
-        <div class="-card" *ngFor="let product of dataLoaded; index as index">
+        <div class="-card" *ngFor="let product of dataLoaded; index as index; trackBy: trackByIdentity">
           <img class="-card__img" [src]="product.image" [alt]="'Card image product ' + product.name">
           <div class="-card__body">
             <h5 class="card-title mb-0">{{product.name}}</h5>
             <div>
               <div class="-card__price">{{ product.price | currency:'BRL':true:'1.2-2'}} </div>
               <select  [id]="'nuProdutos' + index">
-                <option *ngFor="let item of size; index as i " [value]="i + 1" >{{i + 1}}</option>
+                <option *ngFor="let item of size; index as i " [value]="product.quantity || i + 1" >{{ i + 1}}</option>
               </select>
             </div>
           </div>
+
+          <button class="btn -card__btn-remove" (click)="removeItem(product)"> x </button> 
         </div>
         <div class="-footer">
           <button class="btn btn-primary" (click)="submit(longContent)">Finalizar compra</button>
@@ -53,11 +55,9 @@
         <label>Telefone</label>
         <input type="tel" class="form-control" formControlName="phone" aria-describedby="telefoneHelp" placeholder="(11) 99576-6736">
       </div>
-     
-      <button type="submit" class="btn btn-primary mt-3" [disabled]="form.invalid">Cadastrar</button>
+     <div class="d-flex justify-content-end">
+       <button type="submit" class="btn btn-primary btn-lg mt-3" [disabled]="form.invalid">Cadastrar</button>
+     </div>
     </form>
   </div>
-  <!-- <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-  </div> -->
 </ng-template>

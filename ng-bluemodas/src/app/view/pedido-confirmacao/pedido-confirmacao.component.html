@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="-content">
+    <ng-container *ngIf="dataLoaded; else emptyTemplate">
+    <h4 class="text-center">Confirmação de Pedido</h4>
+
+    <div class="-box -box--flex">
+      <img src="assets/img/check.png" alt="confirmado" width="65px">
+      <div class="-box__between">
+        <h5 class="mt-0 mb-0">Código do Pedido:</h5>
+        <div class="-code">
+          {{dataLoaded.code}}
+        </div>
+      </div>
+    </div>
+
+    <div class="-box">
+      <h5>{{ dataLoaded.products.length > 1 ? 'Produtos' : 'Produto'  }}:</h5>
+      <div class="-card" *ngFor="let product of dataLoaded.products">
+        <img class="-card__img" [src]="product.image" [alt]="'Card image product ' + product.name">
+        <div class="-card__body">
+          <h5 class="card-title mb-0">{{product.name}}</h5>
+          <div>
+            <div class="-card__price">{{ product.price | currency:'BRL':true:'1.2-2'}} </div>
+            <b>Quantidade:</b> {{product.quantity}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="-box mb-2">
+      <h5>Dados Pessoais</h5>
+      <div class="">
+        <div>
+          <b>Nome:</b> {{dataLoaded.client.name}}
+        </div>
+        <div>
+          <b>E-mail:</b> {{dataLoaded.client.email}}
+        </div>
+        <div>
+          <b>Telefone:</b> {{dataLoaded.client.phone}}
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  </div>
+</div>
+
+<ng-template #emptyTemplate>
+  <div>
+    Não há pedido confirmado até o momento
+  </div>
+</ng-template>

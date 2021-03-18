@@ -5,6 +5,7 @@ import { StateService } from './../../services/state.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-carrinho',
@@ -26,15 +27,25 @@ export class CarrinhoComponent implements OnInit {
   form: FormGroup;
 
   ngOnInit(): void {
-    this.state.carrinhoPlu$.subscribe(resp => {
-      this.dataLoaded = resp;
+    combineLatest([this.state.carrinhoPlu$]).subscribe({
+      next: ([resp]) => {
+        console.log('🚀 ~ file: carrinho.component.ts ~ line 32 ~ CarrinhoComponent ~ combineLatest ~ resp', resp)
+        this.dataLoaded = resp;
+      }
     })
     this.buildForm();
   }
 
+  trackByIdentity = (index: number, item: any) => item;
+
+  removeItem(item: Product) {
+    const newArr = this.dataLoaded.filter(i => i.id !== item.id);
+    this.state.carrinhoPlu$.next(newArr);
+  }
+
   submit(longContent) {
     const newArr = this.dataLoaded.map((i, index) => {
-      let select: HTMLSelectElement = document.querySelector('#nuProdutos' + index);
+      let select: any = document.querySelector('#nuProdutos' + index);
       return {
         ...i,
         quantity: +select.value
@@ -60,6 +71,7 @@ export class CarrinhoComponent implements OnInit {
 
     this.orderService.emitOrder(order).subscribe({
       next: resp => {
+        this.dataLoaded = resp.products;
         console.log('🚀 ~ file: carrinho.component.ts ~ line 63 ~ CarrinhoComponent ~ this.orderService.emitOrder ~ resp', resp);
       },
       error: err => {

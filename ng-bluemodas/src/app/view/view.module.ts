@@ -8,12 +8,14 @@ import { HeaderComponent } from './header/header.component';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PedidoConfirmacaoComponent } from './pedido-confirmacao/pedido-confirmacao.component';
 @NgModule({
   declarations: [
     ViewComponent,
     HeaderComponent,
     HomeComponent,
     CarrinhoComponent,
+    PedidoConfirmacaoComponent,
   ],
   imports: [
     CommonModule,
