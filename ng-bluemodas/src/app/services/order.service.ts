@@ -10,7 +10,7 @@ export class OrderService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private readonly _baseUrl = 'https://localhost:44359/api';
+  private readonly _baseUrl = 'https://bluestore.azurewebsites.net/api';
 
 
   emitOrder(order: Order): Observable<Order> {

@@ -11,7 +11,7 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private readonly _baseUrl = 'https://localhost:44359/api';
+  private readonly _baseUrl = 'https://bluestore.azurewebsites.net/api';
 
   listAvailProducts(): Observable<Product[]> {
     const url = this._baseUrl + '/product/list';
