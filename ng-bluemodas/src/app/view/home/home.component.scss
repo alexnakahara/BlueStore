@@ -1,0 +1,47 @@
+.-content{
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 16px;
+}
+
+.-img{
+  border: 2px solid #8c8c8c;
+  border-radius: 4px;
+}
+
+.card{
+  border: 1px solid #8c8c8c;
+  &__btn-carrinho{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__btn-comprar{
+    margin-top: 6px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.card-title{
+  font-family: "Source Sans Pro Regular",sans-serif;
+    color: #4d4d4d;
+    text-transform: capitalize;
+    font-size: 18px;
+    line-height: 20px;
+}
+.card-text{
+  &--legend{
+    font-size: 0.95rem;
+    color: #8c8c8c;
+    font-weight: 500;
+  }
+  &--price{
+    color: #333;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+  }
+}

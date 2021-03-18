@@ -1,0 +1,29 @@
+
+.navbar{
+  padding: 12px 60px;
+
+}
+
+.content-carrinho{
+  cursor: pointer;
+  position: relative;
+  .circle {
+    width: 14px;
+    height: 13px;
+    right: -8px;
+    top: -5px;
+    border-radius: 100%;
+    display: block;
+    position: absolute;
+    background-color: #FA5400;
+    line-height: 13px
+  }
+  .nu-itens {
+  display: block;
+  width: 100%;
+    color: #FFF;
+    font-size: 9px;
+    text-align: center;
+  }
+
+}

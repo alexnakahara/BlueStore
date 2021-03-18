@@ -5,8 +5,8 @@ using System;
 
 namespace bluemodas.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
     public class OrderController : ControllerBase
     {
         [HttpPost]

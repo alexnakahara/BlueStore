@@ -1,3 +1,4 @@
+import { StateService } from './../../services/state.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private state: StateService) { }
+
+  nuItens = 0;
 
   ngOnInit() {
+    this.state.carrinhoPlu$.subscribe(resp => {
+      this.nuItens = resp.length
+    })
   }
 
 }

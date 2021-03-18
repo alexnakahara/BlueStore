@@ -4,8 +4,8 @@ using bluemodas.DomainInterface;
 
 namespace bluemodas.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
     public class ProductController : ControllerBase
     {
        [HttpGet]

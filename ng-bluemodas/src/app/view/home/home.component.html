@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="-content" >
+    <ng-container *ngIf="dataLoaded.length > 0 ; else emptyTemplate ">
+      <div *ngFor="let product of dataLoaded">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top -img" [src]="product.image" [alt]="'Card image product ' + product.name">
+          <div class="card-body">
+            <h5 class="card-title">{{product.name}}</h5>
+            <div class="card-text card-text--legend">À partir de </div>
+            <div class="card__btn-carrinho">
+              <div class="card-text card-text--price ">{{ product.price | currency:'BRL':true:'1.2-2'}} </div>
+              <button href="#" class="btn btn-primary mt-2" (click)="addCarrinho(product)"> 
+                Add Carrinho
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+
+<ng-template #emptyTemplate>
+<div>
+  Não há produto disponivel no momento
+</div>
+</ng-template>
+
+
